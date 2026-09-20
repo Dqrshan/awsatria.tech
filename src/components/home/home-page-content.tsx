@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ArtificialHero from "@/components/ui/artificial-hero";
+import type { CommunityStats } from "@/lib/community-stats";
 import AsciiSphere from "@/components/ui/ascii-sphere";
 import CloudBackground from "@/components/ui/cloud-background";
 import NetworkGrid from "@/components/ui/network-grid";
@@ -20,11 +21,11 @@ const revealVariants = {
   },
 };
 
-export function HomePageContent() {
+export function HomePageContent({ stats }: { stats: CommunityStats }) {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <ArtificialHero />
+      <ArtificialHero stats={stats} />
 
       {/* Community Mission Section */}
       <section className="relative bg-secondary py-20 lg:py-32 overflow-hidden">

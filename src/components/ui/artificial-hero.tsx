@@ -5,8 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import AsciiHorizon from "./ascii-horizon";
 import { EntranceFade, EntranceLines } from "./entrance";
+import type { CommunityStats } from "@/lib/community-stats";
 
-export default function ArtificialHero() {
+export default function ArtificialHero({ stats }: { stats: CommunityStats }) {
   // Mount the canvas only after the text entrance finishes, so the
   // heavy per-frame ASCII render never competes with the transition.
   const [artReady, setArtReady] = useState(false);
@@ -15,6 +16,8 @@ export default function ArtificialHero() {
     const id = window.setTimeout(() => setArtReady(true), 1300);
     return () => window.clearTimeout(id);
   }, []);
+
+  const formatCount = (n: number) => n.toLocaleString("en-IN");
 
   return (
     <section className="relative pt-17.5 bg-white border-b border-border overflow-hidden min-h-[92dvh] flex flex-col">
@@ -85,6 +88,9 @@ export default function ArtificialHero() {
             The official AWS Student Builder Group at Atria I.T. Join
             developers and cloud enthusiasts building on the most comprehensive
             cloud.
+          </p>
+          <p className="mt-5 text-sm sm:text-base font-bold text-secondary">
+            {formatCount(stats.total)}+ members building together
           </p>
           <Link
             href={"/whatsapp"}
