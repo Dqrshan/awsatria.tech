@@ -6,6 +6,7 @@ export type MeetupEvent = {
   startsAt: string | null;
   location: string;
   type: string;
+  isOnline: boolean;
   link: string;
   description: string;
   image: string | null;
@@ -103,6 +104,7 @@ function mapGqlEvent(node: any): MeetupEvent {
     startsAt: node.dateTime,
     location: node.venue?.name || (node.isOnline ? "Online Event" : "Venue TBA"),
     type: node.eventType?.toLowerCase() || "meetup",
+    isOnline: Boolean(node.isOnline),
     link: node.eventUrl,
     description: plainDescription,
     image:

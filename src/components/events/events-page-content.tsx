@@ -197,6 +197,15 @@ function MeetupEventCard({
         <div className="absolute top-4 left-4 bg-white px-4 py-2 border border-border text-[0.6rem] font-black uppercase tracking-widest z-10 shadow-sm">
           {event.type || "Workshop"}
         </div>
+        <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 bg-white px-4 py-2 border border-border text-[0.6rem] font-black uppercase tracking-widest shadow-sm">
+          <span
+            aria-hidden="true"
+            className={`w-1.5 h-1.5 rounded-full ${
+              event.isOnline ? "bg-sky-500" : "bg-primary"
+            }`}
+          />
+          {event.isOnline ? "Online" : "In-Person"}
+        </div>
       </div>
       <div className="flex flex-col gap-2 mb-6">
         <span className="text-[0.7rem] font-black uppercase tracking-widest text-primary">
