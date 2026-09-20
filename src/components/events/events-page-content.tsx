@@ -180,8 +180,10 @@ function MeetupEventCard({
   isPast: boolean;
 }) {
   const [imgError, setImgError] = useState(false);
-  // Meetup hosts each event's photo gallery at <event-url>/photos/.
-  const galleryLink = `${event.link.replace(/\/?$/, "/")}photos/`;
+  // Meetup hosts each event's photo gallery at <group-url>/photos/<id>/.
+  const galleryLink = event.link.includes("/events/")
+    ? event.link.replace(/\/events\/([^/?#]+)\/?/, "/photos/$1/")
+    : `${event.link.replace(/\/?$/, "/")}photos/`;
 
   return (
     <motion.div
