@@ -165,37 +165,37 @@ export const teams = {
         linkedin: "n-nikhil-21a187328",
       },
     },
-    {
-      name: "Abhay Sharma",
-      role: "Post-Production Creator",
-      image: "/team/abhay.webp",
-      socials: {
-        github: "Abhay-Code-Bit",
-        linkedin: "sharmaabhay-tech",
-        instagram: "abhay_shrmaa",
-      },
-    },
+    // {
+    //   name: "Abhay Sharma",
+    //   role: "Post-Production Creator",
+    //   image: "/team/abhay.webp",
+    //   socials: {
+    //     github: "Abhay-Code-Bit",
+    //     linkedin: "sharmaabhay-tech",
+    //     instagram: "abhay_shrmaa",
+    //   },
+    // },
   ],
   Events: [
-    {
-      name: "Syed Farhan Fawad",
-      role: "Campus PR Coordinator",
-      image: "/team/farhan.webp",
-      socials: {
-        github: "farhanfawad007",
-        linkedin: "syed-farhan-fawad",
-        instagram: "farhanfawad007",
-      },
-    },
-    {
-      name: "Mariam Farheen Saif",
-      role: "Crowd Engagement Coordinator",
-      image: "/team/mariam.webp",
-      socials: {
-        linkedin: "mariam-farheen-saif-747701337",
-        instagram: "mariam_saif04",
-      },
-    },
+    // {
+    //   name: "Syed Farhan Fawad",
+    //   role: "Campus PR Coordinator",
+    //   image: "/team/farhan.webp",
+    //   socials: {
+    //     github: "farhanfawad007",
+    //     linkedin: "syed-farhan-fawad",
+    //     instagram: "farhanfawad007",
+    //   },
+    // },
+    // {
+    //   name: "Mariam Farheen Saif",
+    //   role: "Crowd Engagement Coordinator",
+    //   image: "/team/mariam.webp",
+    //   socials: {
+    //     linkedin: "mariam-farheen-saif-747701337",
+    //     instagram: "mariam_saif04",
+    //   },
+    // },
     {
       name: "Abhishek Kumar",
       role: "Event Logistics Coordinator",
@@ -216,26 +216,26 @@ export const teams = {
         instagram: "blessenthms_01",
       },
     },
-    {
-      name: "Ratan Kumar B V",
-      role: "Event Logistics Coordinator",
-      image: "/team/ratan.webp",
-      socials: {
-        linkedin: "ratan-kumar-bv-194135282",
-        instagram: "ratan_bv",
-      },
-    },
+    // {
+    //   name: "Ratan Kumar B V",
+    //   role: "Event Logistics Coordinator",
+    //   image: "/team/ratan.webp",
+    //   socials: {
+    //     linkedin: "ratan-kumar-bv-194135282",
+    //     instagram: "ratan_bv",
+    //   },
+    // },
   ],
   Operations: [
-    {
-      name: "Chitrashree G",
-      role: "Guest Experience Operator",
-      image: "/team/chitrashree.webp",
-      socials: {
-        github: "Chitrashree13",
-        linkedin: "chitrashree-g",
-      },
-    },
+    // {
+    //   name: "Chitrashree G",
+    //   role: "Guest Experience Operator",
+    //   image: "/team/chitrashree.webp",
+    //   socials: {
+    //     github: "Chitrashree13",
+    //     linkedin: "chitrashree-g",
+    //   },
+    // },
     {
       name: "N M Meghashree",
       role: "Guest Experience Operator",
@@ -246,14 +246,14 @@ export const teams = {
         instagram: "meghashree7772",
       },
     },
-    {
-      name: "Baby V S",
-      role: "Onboarding Operator",
-      image: "/team/baby.webp",
-      socials: {
-        linkedin: "baby-v-s",
-      },
-    },
+    // {
+    //   name: "Baby V S",
+    //   role: "Onboarding Operator",
+    //   image: "/team/baby.webp",
+    //   socials: {
+    //     linkedin: "baby-v-s",
+    //   },
+    // },
     {
       name: "Sanjana C P",
       role: "Onboarding Operator",
@@ -265,14 +265,14 @@ export const teams = {
         twitter: "",
       },
     },
-    {
-      name: "Krishna Bhat U",
-      role: "Tech Resource Operator",
-      image: "/team/krishna.webp",
-      socials: {
-        github: "krx7h",
-        linkedin: "krishnabhatu",
-      },
-    },
+    // {
+    //   name: "Krishna Bhat U",
+    //   role: "Tech Resource Operator",
+    //   image: "/team/krishna.webp",
+    //   socials: {
+    //     github: "krx7h",
+    //     linkedin: "krishnabhatu",
+    //   },
+    // },
   ],
 };
