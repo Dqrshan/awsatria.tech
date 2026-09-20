@@ -140,9 +140,22 @@ export function EventsPageContent({ events }: EventsPageContentProps) {
         <div className="container px-8 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {filteredEvents.length > 0 ? (
-              filteredEvents.map((event, i) => (
-                <MeetupEventCard key={event.id} event={event} index={i} />
-              ))
+              filteredEvents.map((event, i) => {
+                const eventDate = event.startsAt
+                  ? getDateParts(new Date(event.startsAt), EVENT_TIME_ZONE)
+                  : null;
+                const isPast = Boolean(
+                  eventDate && today && compareDateParts(eventDate, today) < 0
+                );
+                return (
+                  <MeetupEventCard
+                    key={event.id}
+                    event={event}
+                    index={i}
+                    isPast={isPast}
+                  />
+                );
+              })
             ) : (
               <div className="col-span-full py-32 text-center border border-dashed border-border">
                 <p className="text-secondary/50 font-black uppercase tracking-[0.2em]">
@@ -160,11 +173,15 @@ export function EventsPageContent({ events }: EventsPageContentProps) {
 function MeetupEventCard({
   event,
   index,
+  isPast,
 }: {
   event: MeetupEvent;
   index: number;
+  isPast: boolean;
 }) {
   const [imgError, setImgError] = useState(false);
+  // Meetup hosts each event's photo gallery at <event-url>/photos/.
+  const galleryLink = `${event.link.replace(/\/?$/, "/")}photos/`;
 
   return (
     <motion.div
@@ -194,9 +211,6 @@ function MeetupEventCard({
             </span>
           </div>
         )}
-        <div className="absolute top-4 left-4 bg-white px-4 py-2 border border-border text-[0.6rem] font-black uppercase tracking-widest z-10 shadow-sm">
-          {event.type || "Workshop"}
-        </div>
         <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 bg-white px-4 py-2 border border-border text-[0.6rem] font-black uppercase tracking-widest shadow-sm">
           <span
             aria-hidden="true"
@@ -222,15 +236,27 @@ function MeetupEventCard({
         <MapPin className="w-4 h-4 text-primary shrink-0" />
         {event.location}
       </div>
-      <a
-        href={event.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`RSVP for ${event.title} on Meetup`}
-        className="inline-flex items-center gap-4 px-8 py-4 border border-secondary text-secondary text-[0.7rem] font-black uppercase tracking-widest hover:bg-secondary hover:text-white transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
-      >
-        RSVP ON MEETUP <ExternalLink className="w-4 h-4" />
-      </a>
+      {isPast ? (
+        <a
+          href={galleryLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View photo gallery for ${event.title} on Meetup`}
+          className="inline-flex items-center gap-4 px-8 py-4 border border-secondary text-secondary text-[0.7rem] font-black uppercase tracking-widest hover:bg-secondary hover:text-white transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+        >
+          View Gallery <ExternalLink className="w-4 h-4" />
+        </a>
+      ) : (
+        <a
+          href={event.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`RSVP for ${event.title} on Meetup`}
+          className="inline-flex items-center gap-4 px-8 py-4 border border-secondary text-secondary text-[0.7rem] font-black uppercase tracking-widest hover:bg-secondary hover:text-white transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+        >
+          RSVP ON MEETUP <ExternalLink className="w-4 h-4" />
+        </a>
+      )}
     </motion.div>
   );
 }
