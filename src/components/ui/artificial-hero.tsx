@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import AsciiHorizon from "./ascii-horizon";
+import HeroShader from "./hero-shader";
 import { EntranceFade, EntranceLines } from "./entrance";
 import type { CommunityStats } from "@/lib/community-stats";
 
@@ -21,6 +22,11 @@ export default function ArtificialHero({ stats }: { stats: CommunityStats }) {
 
   return (
     <section className="relative pt-17.5 bg-white border-b border-border overflow-hidden min-h-[92dvh] flex flex-col">
+      {/* Interactive shader light-field (falls back to washes without WebGL) */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+        <HeroShader />
+      </div>
+
       {/* Background gradient washes */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
         <div

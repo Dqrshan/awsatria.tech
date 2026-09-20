@@ -6,7 +6,9 @@ export type MeetupEvent = {
   startsAt: string | null;
   location: string;
   type: string;
+  isOnline: boolean;
   link: string;
+  galleryUrl: string;
   description: string;
   image: string | null;
 };
@@ -28,6 +30,7 @@ const UPCOMING_QUERY = `query getUpcomingGroupEvents($urlname: String!, $afterDa
           isOnline
           eventType
           venue { name }
+          photoAlbum { id photoCount }
           featuredEventPhoto { baseUrl highResUrl }
           displayPhoto { baseUrl highResUrl }
         }
@@ -50,6 +53,7 @@ const PAST_QUERY = `query getPastGroupEvents($urlname: String!, $beforeDateTime:
           isOnline
           eventType
           venue { name }
+          photoAlbum { id photoCount }
           featuredEventPhoto { baseUrl highResUrl }
           displayPhoto { baseUrl highResUrl }
         }
@@ -82,8 +86,22 @@ function formatDateParts(isoDate: string) {
   };
 }
 
-function mapGqlEvent(node: any): MeetupEvent {
-  const { date, time } = formatDateParts(node.dateTime);
+// Meetup photo albums live at <group-url>/photos/<albumId>/ — the album ID
+// differs from the event ID. Without an album, fall back to the group's
+// /photos/ page showing all albums.
+function buildGalleryUrl(
+  eventUrl: string | null | undefined,
+  photoAlbumId: string | null | undefined
+): string {
+  if (eventUrl?.includes("/events/")) {
+    return photoAlbumId
+      ? eventUrl.replace(/\/events\/.*$/, `/photos/${photoAlbumId}/`)
+      : eventUrl.replace(/\/events\/.*$/, "/photos/");
+  }
+  return "https://www.meetup.com/aws-sbg-at-atria-institute-of-technology/photos/";
+}
+
+function mapGqlEvent(node: any): MeetupEvent {  const { date, time } = formatDateParts(node.dateTime);
   
   // Clean up description (remove HTML tags)
   const plainDescription = node.description
@@ -103,7 +121,9 @@ function mapGqlEvent(node: any): MeetupEvent {
     startsAt: node.dateTime,
     location: node.venue?.name || (node.isOnline ? "Online Event" : "Venue TBA"),
     type: node.eventType?.toLowerCase() || "meetup",
+    isOnline: Boolean(node.isOnline),
     link: node.eventUrl,
+    galleryUrl: buildGalleryUrl(node.eventUrl, node.photoAlbum?.id ?? null),
     description: plainDescription,
     image:
       node.featuredEventPhoto?.highResUrl ||
